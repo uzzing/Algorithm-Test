@@ -1,3 +1,50 @@
+//
+var isValid = function(s) {   
+    const stack = [];
+    
+    for (let i = 0 ; i < s.length ; i++) {
+        let c = s.charAt(i);
+        switch(c) {
+            case '(': stack.push(')');
+                break;
+            case '[': stack.push(']');
+                break;
+            case '{': stack.push('}');
+                break;
+            default:
+                if (c !== stack.pop()) {
+                    return false;
+                }
+        }
+    }
+    
+    return stack.length === 0;
+};
+
+// 2
+var isValid = function(s) {
+
+    const stack = [];
+    const chars = {
+        '}': '{',
+        ')': '(',
+        ']': '['
+    };
+    
+    for (const ch of s) {
+        if (ch in chars) { 
+            if (stack.pop() != chars[ch]) {
+                return false;
+            }
+        } else {
+            stack.push(ch);
+        };
+    };
+    
+    return stack.length == 0 ? true : false;
+};
+
+// 3
 let areMatchedBrackets = function(b1, b2){
     return (b1 === '(' && b2 === ')') || b1 === '{' && b2 === '}' || b1 === '[' && b2 === ']';
 }
